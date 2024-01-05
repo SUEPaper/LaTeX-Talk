@@ -1,0 +1,772 @@
+\section{Hello world案例}
+
+\begin{frame}[fragile]{Hello World!}
+  \begin{minted}
+    [
+      frame=lines,
+      framesep=2mm,
+      baselinestretch=1.2,
+      bgcolor=LightGray,
+    ]{tex}
+% 用 pdfLaTeX、XeLaTeX 或 LuaLaTeX 编译
+\documentclass{article}
+\begin{document}
+Hello world!
+\end{document}
+  \end{minted}
+  \pause
+  \begin{minted}
+  [
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=LightGray,
+  ]{tex}
+% 用 XeLaTeX 或 LuaLaTeX 编译
+\documentclass{ctexart}
+\begin{document}
+你好中国！
+\end{document}
+  \end{minted}
+\end{frame}
+
+\begin{frame}{语法}
+  \begin{itemize}
+      \item 命令（控制序列）：以 \texttt{\textbackslash} 开头，大小写敏感
+      \begin{itemize}
+          \item \mintinline{tex}{\LaTeX{}} $\to$ \LaTeX{}
+          \item 有作用域的概念，可以用 \texttt{\{\}} 限定作用域
+          \item 可以接收参数，如 \mintinline{tex}{\documentclass{book}}
+          \item 必需参数用 \texttt{\{\}}，可选参数用 \texttt{[]}
+      \end{itemize} 
+      \pause
+      \item 注释以 \texttt{\%} 开头
+      \item 连续多个空格 = 单个空格 = 单个换行
+      \item 可以定义自己的命令
+  \end{itemize}
+\end{frame}
+
+\section{填写创作}
+
+\begin{frame}[fragile]{文件的结构}
+  \begin{minted}
+    [
+      frame=lines,
+      framesep=2mm,
+      baselinestretch=1.2,
+      bgcolor=LightGray,
+    ]{tex}
+  \documentclass{article} % 文档类
+  % 导言区 (preamble)：加载宏包、定义命令、设置文档格式等
+  
+  \begin{document}        % 文档开始
+  % 正文区 (body)：文档的内容
+  Hello world!
+  \input{content.tex}     % 也可以导入其他文件内容
+  \end{document}          % 文档结束，后续内容不会被编译
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{文档类与宏包}
+  \begin{itemize}
+      \item \LaTeX{} 文档开头必须包含 \mintinline{tex}{\documentclass} 指定文档类
+      \item 基础文档类：\texttt{article}、\texttt{report}、\texttt{book}、\texttt{beamer} 等
+      \item 中文变体：\texttt{ctexart}、\texttt{ctexrep}、\texttt{ctexbook}、\texttt{ctexbeamer} 等
+      \item 可以通过可选参数指定字号、纸张大小、双面打印等选项
+      \begin{minted}{tex}
+          \documentclass[12pt, a4paper, twoside]{article}
+      \end{minted}
+      \pause
+      \item 宏包相当于第三方库，可以引入更丰富的扩展功能
+      \begin{minted}{tex}
+          \usepackage{amsmath}
+          \usepackage[final]{minted}
+      \end{minted}
+      \item \TeX{} Live full 自带大量宏包
+      \item 通过 \texttt{texdoc \textit{package}} 查看文档
+  \end{itemize}
+\end{frame}
+
+\section{段落及排版样式}
+
+\begin{frame}[fragile]{段落 (paragraph)}
+  \begin{itemize}
+      \item 正常写作即可，以空行或 \mintinline{tex}{\par} 分段
+      \item 行首空格会被忽略，多个空格会被合并为一个
+      \item 换行在非中文语境下视作一个空格
+  \end{itemize}
+  
+  \vspace{1em}
+  \pause
+  \begin{columns}
+      \begin{column}{0.5\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+Consecutive spaces    are
+squashed     in \LaTeX{}. 中文语境下
+不会添加空格。Leading spaces are
+    ignored. Trailing comment does%
+n't break a word.
+
+A new paragraph.\par
+或者用 \verb|\par| 也可以。
+          \end{minted}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+          \setlength{\parskip}{.5em}\small
+  Consecutive spaces    are
+  squashed     in \LaTeX{}. 中文语境下
+  不会添加空格。Leading spaces are
+      ignored. Trailing comment does%
+  n't break a word.
+  
+  A new paragraph.\par
+  或者用 \verb|\par| 也可以。
+      \end{column}
+  \end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{断行与断页}
+\begin{itemize}
+    \item 可以用 \mintinline{tex}{\\} 或 \mintinline{tex}{\newline} 强制断行
+    \begin{itemize}
+        \item 类似 Word 中的``软回车''，不会产生新的段落
+    \end{itemize}
+    \item \mintinline{tex}{\newpage} 强制断页
+    \item \mintinline{tex}{\clearpage} 强制断页并清空\emph{浮动体}
+    \begin{itemize}
+        \item We'll cover this soon ;)
+        \item 一般用 \mintinline{tex}{\newpage} 即可
+    \end{itemize}
+\end{itemize}
+\vspace{1em}
+\pause
+
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+Starting a new paragraph. \\
+Oops, a new line within it.
+
+Finally another paragraph. \newline
+Another new line, oh my!
+        \end{minted}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \setlength{\parskip}{.5em}\small
+Starting a new paragraph. \\
+Oops, a new line within it.
+
+Finally another paragraph. \newline
+Another new line, oh my!
+    \end{column}
+\end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{字形与字号}
+\begin{itemize}
+    \item 有两类修改字形的命令：\\\mintinline{tex}{{\bfseries bold}} 和 \mintinline{tex}{\textbf{bold}}
+    \begin{itemize}
+        \item 前者对作用域内的所有内容生效，后者只对参数内容生效
+        \item 都是“内置”字体的不同样式，自定义字体？留作习题
+    \end{itemize}
+    \item 修改字号：\mintinline{tex}{{\large Hi}}
+    \item \alert{汉字一般不使用斜体}
+    \pause
+    \item \alert{不要滥用字体样式}{\scriptsize（本页除外）} 
+\end{itemize}
+\pause
+\begin{columns}
+    \begin{column}{0.62\textwidth}
+        \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\textbf{bold} \textsf{sans serif}
+\texttt{typewriter} \textsc{Small Caps}
+\textit{italic} \textsl{slanted}
+
+{\tiny tiny} {\scriptsize scriptsize}
+{\footnotesize footnotesize} {\small small}
+{\normalsize normalsize} {\large large}
+{\Large Large} {\LARGE LARGE}
+{\huge huge} {\Huge Huge}
+        \end{minted}
+    \end{column}
+    \begin{column}{0.39\textwidth}\vspace{-2em}
+
+\textbf{bold} \textsf{sans serif}
+\texttt{typewriter} \textsc{Small Caps}
+\textit{italic} {\addfontfeatures{AutoFakeSlant}\textsl{slanted}}
+
+{\tiny tiny} {\scriptsize scriptsize}
+{\footnotesize footnotesize} {\small small}
+{\normalsize normalsize} {\large large}
+{\Large Large} {\LARGE LARGE}
+{\huge huge} {\Huge Huge}
+    \end{column}
+\end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{关于字符和标点}
+\begin{itemize}
+    \item 特殊字符需要转义，如 \mintinline{tex}{\_}、\mintinline{tex}{\%}、\mintinline{tex}{\$}、\mintinline{tex}{\&}、\mintinline{tex}|\{|、\mintinline{tex}|\}| 等等
+    \begin{itemize}
+        \item \mintinline{tex}{\~{}}、\mintinline{tex}{\^{}} 带大括号防止将后面的字符理解为参数
+        \item \mintinline{tex}{\textbackslash} 反斜杠
+    \end{itemize}
+    \item 西文语境下的引号：\mintinline{tex}{``double''} \quad ``double''
+    \begin{itemize}
+        \item 中文语境下正常输入即可
+    \end{itemize}
+    \item 连字符：\mintinline{tex}{-}、短破折号：\mintinline{tex}{--}、长破折号：\mintinline{tex}{---}
+    \begin{itemize}
+        \item Newton-Leibniz Formula
+        \item Henry Kissinger (1923--2023)
+        \item Don't use \texttt{\$\$} --- it breaks spacing!
+    \end{itemize}
+    \item 防止西文连字：\mintinline{tex}{dif{}f{}icult} \quad dif{}f{}icult
+    \begin{itemize}
+        \item 对比：difficult
+    \end{itemize}
+\end{itemize}
+\end{frame}
+  
+\begin{frame}[fragile]{强制行距/间距}
+\begin{itemize}
+    \item 长度单位：pt，in（英寸），cm，mm，em（小写 `m' 的宽度），ex（小写 `x' 的高度）
+    \item 行距：\mintinline{tex}{\linespread{factor}}（默认行距 1.2 倍字号大小）
+        \begin{itemize}
+            \item 局部修改要在后面加 \mintinline{tex}{\selectfont}，且要在范围内手动分段
+        \end{itemize}
+    \item 插入水平间距（多空格无效）：\mintinline{tex}{\hspace{length}}
+        \begin{itemize}
+            \item \mintinline{tex}{\quad} 相当于 1em，\mintinline{tex}{\qquad} 相当于 2em
+            \item \mintinline{tex}{\hspace*} 防止因为断行而消失
+        \end{itemize}
+    \item 插入垂直间距：\mintinline{tex}{\vspace{length}}
+        \begin{itemize}
+            \item \mintinline{tex}{\\[1em]} 可以在换行的同时插入垂直间距
+        \end{itemize}
+\end{itemize}
+\pause
+\begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\tiny]{tex}
+{\linespread{1.6}\selectfont This is a paragraph with 1.6 linespread.\\
+This is the next line and \quad space and \hspace{3em} more and
+\hspace{\fill}lol\par}
+
+\vspace{-1em}Next paragraph.\\[1em] and next line.
+        \end{minted}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \setlength{\parskip}{.5em}\scriptsize
+{\linespread{1.6}\selectfont This is a paragraph with 1.6 linespread.\\
+This is the next line and \quad space and \hspace{3em} more and
+\hspace{\fill}lol\par}
+
+\vspace{-1em}Next paragraph.\\[1em] and next line.
+    \end{column}
+\end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{标题页}
+    在导言区：
+\begin{itemize}
+    \item \mintinline{tex}{\title}\texttt{\small\{\textit{title}\}}：标题
+    \item \mintinline{tex}{\author}\texttt{\small\{\textit{author}\}}：作者
+    \item \mintinline{tex}{\date}\texttt{\small\{\textit{date}\}}：日期，不写则默认为当前日期 \mintinline{tex}{\today}
+\end{itemize}
+    在正文区使用 \mintinline{tex}{\maketitle} 生成标题页
+\pause
+\begin{columns}
+    \begin{column}{0.4\textwidth}
+        \centering
+        \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\title{\textbf{我是标题}}
+\author{箱子不知道哦}
+\date{1969 年 12 月 31 日}
+\begin{document}
+\maketitle
+\end{document}
+        \end{minted}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/titlepage.pdf}
+    \end{column}
+\end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{环境}
+\begin{itemize}
+    \item 成对出现的命令，用于控制一段内容的格式
+    \item 以 \mintinline{tex}{\begin{environment}} 开始，以 \mintinline{tex}{\end{environment}} 结束
+    \item 常见环境：\texttt{itemize}、\texttt{figure}、\texttt{table} 等
+\end{itemize}
+\vspace{1em}
+\pause
+\begin{columns}
+    \begin{column}{0.4\textwidth}
+        \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\begin{itemize}
+    \item macOS
+    \item Windows
+    \item Linux
+\end{itemize}
+        \end{minted}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+        \small
+\begin{itemize}
+    \item macOS
+    \item Windows
+    \item Linux
+\end{itemize}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\subsection{目录}
+
+\begin{frame}{章节和目录}
+\begin{itemize}
+    \item 应将文档合理地分割为章、节、小节等
+    \begin{itemize}
+        \item \mintinline{tex}{\part}、\mintinline{tex}{\chapter} 仅适用于 \texttt{book} 和 \texttt{report} 文档类
+        \item \mintinline{tex}{\section}、\mintinline{tex}{\subsection}、\mintinline{tex}{\subsubsection}
+        \item 不常用：\mintinline{tex}{\paragraph}、\mintinline{tex}{\subparagraph}
+    \end{itemize}
+    \item 自动编号，默认编号深度为 3，可以修改
+    \item 带星号的版本不会自动编号，也不会出现在目录中（\mintinline{tex}{\section*}）
+    \pause
+    \item \mintinline{tex}{\tableofcontents} 生成目录
+    \begin{itemize}
+        \item 如果不使用 \texttt{latexmk}，需要多次编译
+    \end{itemize}
+    \item \mintinline{tex}{\appendix} 起为附录，后续章节编号为大写字母
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{层次与目录生成}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\tableofcontents % 这里是目录
+\part{有监督学习}
+\chapter{支持向量机}
+\section{支持向量机简介}
+\subsection{支持向量机的历史}
+\subsubsection{支持向量机的诞生}
+\paragraph{一些趣闻}
+\subparagraph{第一个趣闻}
+            \end{minted}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            第一部分\quad 有监督学习\\
+            第一章\quad 支持向量机 \\
+            1. 支持向量机简介 \\
+            1.1 支持向量机的历史 \\
+            1.1.1 支持向量机的诞生 \\
+            一些趣闻  \\
+            第一个趣闻
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\subsection{图片}
+
+\begin{frame}[fragile]{图片}
+  \begin{itemize}
+      \item 需要 \texttt{graphicx} 宏包{\small{}（注意不是 \texttt{graphic\textbf{s}}）}
+      \item \mintinline{tex}{\includegraphics}\texttt{\small[\textit{options}]\{\textit{filename}\}}
+      \begin{itemize}
+          \item 常用选项：\texttt{width}、\texttt{height}、\texttt{scale} 宽高缩放
+          \item \texttt{\textit{filename}} 可以是相对路径或绝对路径
+      \end{itemize}
+  \end{itemize}
+  \vspace{1em}
+  \pause
+  \begin{columns}
+      \begin{column}{0.55\textwidth}
+          \begin{minted}[highlightlines={4,8,9},frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+  \usepackage{graphicx}
+  \graphicspath{{lec4/}}
+  % ...
+  \begin{figure}
+    \centering
+    \includegraphics[...]{logo/logo.png}
+    \caption{上海电力大学校徽}
+    \label{fig:suep:LOGO}
+  \end{figure}
+          \end{minted}
+      \end{column}
+      \begin{column}{0.45\textwidth}
+          \scriptsize
+  \begin{figure}
+      \centering
+      \includegraphics[width=.6\textwidth]{logo/logo.png}
+      \caption{上海电力大学校徽}
+      \label{fig:suep:LOGO}
+  \end{figure}
+      \end{column}
+  \end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{浮动体}
+  \begin{itemize}
+      \item 再次强调：\alert{别把 \LaTeX{} 当 Word 用}
+      \begin{minted}[fontsize=\scriptsize,highlightlines={1,3}]{tex}
+  \begin{figure}[htbp]
+      % ...
+  \end{figure}
+      \end{minted}
+      \item 摆脱“见下图”、“如上图所示”、“如表所示”……
+      \item \mintinline{tex}{[htbp]} 是浮动体的位置选项：here / top / bottom / page
+      \item 使用\alert{交叉引用}：\mintinline{tex}{\label} 和 \mintinline{tex}{\ref}、\mintinline{tex}{\pageref}、\mintinline{tex}{\nameref}、\mintinline{tex}{\eqref}
+      \item 进阶：\texttt{hyperref} 与 \texttt{cleveref} 等宏包
+  \end{itemize}
+  \pause
+  \begin{minted}{tex}
+  图 \ref{fig:ckc} 是上海电力大学校徽
+  （在 PDF 中是 \pageref{fig:ckc} 页）。
+  \end{minted}
+  图 \ref{fig:ckc} 是上海电力大学校徽
+  （在 PDF 中是 \pageref{fig:ckc} 页）。
+  
+  推荐阅读：\href{http://static.latexstudio.net/wp-content/uploads/2018/03/LianTze-presentation-0320-forReading.pdf}{漫谈 \LaTeX{} 排版常见概念误区}
+\end{frame}
+  
+\begin{frame}[fragile]{设置页大小及页边距}
+  \begin{itemize}
+      \item \texttt{geometry} 宏包
+      \item 全局分栏：\mintinline{tex}{\twocolumn} 和 \mintinline{tex}{\onecolumn}
+      \item 局部分栏：\texttt{multicol} 宏包的 \texttt{multicols} 环境
+  \end{itemize}
+  \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray]{tex}
+\usepackage{geometry}
+
+\geometry{paper=b5paper}        % 标准纸张大小
+\geometry{paperwidth=260mm,
+          paperheight=185mm}    % 自定义纸张大小
+\geometry{margin=1in}           % 全相等
+\geometry{left=1in, right=1in,
+          top=1in, bottom=1in}  % 分别设置
+\geometry{hmargin=1.5in, vmargin=1in}   % 水平和垂直
+  \end{minted}
+\end{frame}
+  
+\subsection{列表}
+
+\begin{frame}[fragile]{列表}
+  \begin{itemize}
+      \item \texttt{itemize}：无序列表
+      \item \texttt{enumerate}：有序列表
+      \item \texttt{description}：描述列表
+      \item 列表中的每一项都是一个 \mintinline{tex}{\item}
+      \begin{itemize}
+          \item 可选参数可以修改编号样式
+      \end{itemize}
+      \item 推荐使用 \texttt{enumitem} 宏包
+  \end{itemize}
+  \pause
+  \begin{columns}
+      \begin{column}{0.55\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+  \begin{description}
+      \item[Slackware] 历史最悠久
+      \item[Debian] 历史第二悠久
+      \item[Ubuntu] 基于 Debian，最流行
+      \item[Kali Linux] 面向安全工作者
+  \end{description}
+          \end{minted}
+      \end{column}
+      \begin{column}{0.45\textwidth}\scriptsize
+  \begin{description}
+      \item[Slackware] 历史最悠久
+      \item[Debian] 历史第二悠久
+      \item[Ubuntu] 基于 Debian，最流行
+      \item[Kali Linux] 面向安全工作者
+  \end{description}
+      \end{column}
+  \end{columns}
+  \end{frame}
+  
+  \begin{frame}[fragile]{对齐环境}
+  \begin{itemize}
+      \item \texttt{center} 居中，\texttt{flushleft} 左对齐，\texttt{flushright} 右对齐
+      \begin{itemize}
+          \item 这里指的是对齐\emph{环境}
+          \item 会在环境上下额外生成间距
+      \end{itemize}
+      \item \mintinline{tex}{\centering}、\mintinline{tex}{\raggedright}、\mintinline{tex}{\raggedleft}
+      \begin{itemize}
+          \item 这里指的是对齐\emph{命令}
+          \item 不会生成额外间距，直接改变对齐方式
+          \item 注意左对齐是 \mintinline{tex}{\raggedright}
+      \end{itemize}
+  \end{itemize}
+  \pause
+  \begin{columns}
+      \begin{column}{0.4\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+  \begin{center}
+      some text
+  \end{center}
+  \begin{flushright}
+      some text
+  \end{flushright}
+  
+  \centering some text \par
+  \raggedleft some text
+          \end{minted}
+      \end{column}
+      \begin{column}{0.3\textwidth}\scriptsize
+  \begin{center}
+      some text
+  \end{center}
+  \begin{flushright}
+      some text
+  \end{flushright}
+  
+  \centering some text \par
+  \raggedleft some text
+      \end{column}
+  \end{columns}
+  \end{frame}
+
+% \begin{frame}[fragile]{\LaTeX{} 环境举例}
+%     \vspace{1em}
+%     \begin{minipage}{0.4\linewidth}
+%         \begin{lstlisting}[basicstyle=\ttfamily\small]
+% \begin{itemize}
+%     \item 一条
+%     \item 次条
+%     \item 这一条可以分为 ...
+%     \begin{itemize}
+%         \item 子一条
+%     \end{itemize}
+% \end{itemize}
+%          \end{lstlisting}
+%     \end{minipage}\hspace{1.5cm}
+%     \begin{minipage}{0.4\linewidth}
+%         \begin{itemize}
+%             \item 一条
+%             \item 次条
+%             \item 这一条可以分为 ...
+%             \begin{itemize}
+%                 \item 子一条
+%             \end{itemize}
+%         \end{itemize}
+%     \end{minipage}
+% % \smallskip
+
+% \begin{minipage}{0.4\linewidth}
+% \begin{lstlisting}
+% \begin{enumerate}
+%     \item 一条
+%     \item 次条
+%     \item 再条
+% \end{enumerate}\end{lstlisting}
+%     \end{minipage}\hspace{1.5cm}
+%     \begin{minipage}{0.4\linewidth}
+%     \vspace{-1cm}
+% \begin{enumerate}
+%     \item 一条
+%     \item 次条
+%     \item 再条
+% \end{enumerate}
+%     \end{minipage}
+% \end{frame}
+%     %
+    
+% \begin{frame}[fragile]{列表与枚举}
+% \begin{columns}
+% \begin{column}{.6\textwidth}
+% \begin{lstlisting}[basicstyle=\ttfamily\small]
+% \begin{enumerate}
+% \item \LaTeX{} 好处都有啥
+% \begin{description}
+%     \item[好用] 体验好才是真的好
+%     \item[好看] 强迫症的福音
+%     \item[开源] 众人拾柴火焰高
+% \end{description}
+% \item 还有呢?
+% \begin{itemize}
+%     \item 好处 1
+%     \item 好处 2
+% \end{itemize}
+% \end{enumerate}
+% \end{lstlisting}
+% \end{column}
+% \begin{column}{.4\textwidth}
+% {\small
+% \begin{enumerate}
+% \item \LaTeX{} 好处都有啥
+%     \begin{description}
+%     \item[好用] 体验好才是真的好
+%     \item[好看] 治疗强迫症
+%     \item[开源] 众人拾柴火焰高
+%     \end{description}
+% \item 还有呢?
+%     \begin{itemize}
+%     \item 好处 1
+%     \item 好处 2
+%     \end{itemize}
+% \end{enumerate}
+% }
+% \end{column}
+% \end{columns}
+
+% \end{frame}
+
+% \subsection{目录}
+%     \begin{frame}[fragile]{层次与目录生成}
+%     \begin{columns}
+%     \begin{column}{.6\textwidth}
+%     \lstset{language=[LaTeX]TeX}
+%     \begin{lstlisting}[basicstyle=\ttfamily\small]
+% \tableofcontents % 这里是目录
+% \part{有监督学习}
+% \chapter{支持向量机}
+% \section{支持向量机简介}
+% \subsection{支持向量机的历史}
+% \subsubsection{支持向量机的诞生}
+% \paragraph{一些趣闻}
+% \subparagraph{第一个趣闻}
+%     \end{lstlisting}
+%     \end{column}
+%     \begin{column}{.4\textwidth}
+%     第一部分\quad 有监督学习\\
+%     第一章\quad 支持向量机 \\
+%     1. 支持向量机简介 \\
+%     1.1 支持向量机的历史 \\
+%     1.1.1 支持向量机的诞生 \\
+%     一些趣闻  \\
+%     第一个趣闻
+%     \end{column}
+%     \end{columns}
+    
+%     \end{frame}
+
+%     \subsection{插图，表格，交叉引用}
+%     \begin{frame}[fragile]{交叉引用与插入插图}
+%         \begin{itemize}
+%         \item 给对象命名：图片、表格、公式等\\
+%         |\label{name}|
+%       \item 引用对象\\
+%         |\ref{name}|
+%         \end{itemize}
+%       \bigskip
+      
+%         \begin{minipage}{0.7\linewidth}
+%           \lstset{language=[LaTeX]TeX}
+%           \begin{lstlisting}
+% 上海电力大学校徽请参见图~\ref{fig:sustech:LOGO}。
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics[height=.2\textheight]%
+%   {LOGO.png}
+%   \caption{上海电力大学校徽。}
+%   \label{fig:sustech:LOGO}
+% \end{figure}
+%       \end{lstlisting}
+%         \end{minipage}\hfill
+%         \begin{minipage}{0.3\linewidth}\centering
+%           {\songti 上海电力大学校徽请参见图~1。}\\[1em]
+%        \includegraphics[height=0.2\textheight]{logo.png}\\
+%        {\footnotesize\heiti 图~1. 上海电力大学校徽。}
+%         \end{minipage}
+%       \end{frame}
+      
+%       \begin{frame}[fragile]{交叉引用与插入表格}
+%         \begin{columns}
+%         \column{.6\textwidth}
+%         \lstset{language=[LaTeX]TeX}
+%         \begin{lstlisting}
+% \begin{table}[htbp]
+%     \caption{编号与含义}
+%     \label{tab:number}
+%     \centering
+%     \begin{tabular}{cl}
+%       \hline
+%       编号 & 含义 \\
+%       \hline
+%       1    & 第一 \\
+%       2    & 第二 \\
+%       \hline
+%     \end{tabular}
+% \end{table}
+% 公式~(\ref{eq:vsphere}) 中编号与含义
+% 请参见表~\ref{tab:number}。
+%       \end{lstlisting}
+%       \column{.4\textwidth}
+%       \centering
+%       {\small 表~1. 编号与含义}\\[2pt]
+%       \begin{tabular}{cl}\hline
+%       编号 & 含义 \\\hline
+%       1 & 第一\\
+%       2  & 第二\\\hline
+%       \end{tabular}\\[5pt]
+      
+%       \normalsize 公式~(\ref{eq:vsphere})编号与含义请参见表~1。
+%         \end{columns}
+%       \end{frame}
+      
+%       \begin{frame}[fragile]{浮动体}
+%       \begin{itemize}
+%       \item 初学者最“捉摸不透”的特性之一 \url{https://liam.page/2017/03/11/floats-in-LaTeX-basic}
+%       \item 图片和表格有时会很大，在插入的位置不一定放得下，因此需要浮动调整
+%       \item 避免在文中使用「下图」「上图」的说法，而是使用图表的编号，例如 |图~\ref{fig:fig1}| 。
+%       \item |\begin{figure}[<位置>] 图片 \end{figure}|
+%         \begin{itemize}
+%         \item 位置参数指定浮动体摆放的偏好
+%         \item |h| 当前位置(here), |t| 顶部(top), |b| 底部(bottom), |p| 单独成页(p)
+%         \item |!h| 表示忽略一些限制，|H| 表示强制\alert{（强烈不建议，除非你知道自己在做什么）}
+%         \end{itemize}
+%       \item 温馨提示：图标题一般在下方，表标题一般在上方
+%       \end{itemize}
+%       \end{frame}
+      
+%       \begin{frame}[fragile]
+%         \frametitle{作图与插图}
+%         \begin{itemize}
+%           \item 外部插入
+      
+%             \begin{itemize}
+%               \item Mathematica、MATLAB
+%               \item PowerPoint、Visio、Adobe Illustrator、Inkscape
+%               \item Python \pkg{Matplotlib} 库、\texttt{Plots.jl}、R、Plotly 等
+%               \item draw.io \url{https://draw.io/}、ProcessOn \url{https://www.processon.com/} 等在线绘图网站
+%             \end{itemize}
+      
+%           \item \TeX 内联
+      
+%             \begin{itemize}
+%               \item Asymptote
+%               \item \alert{\pkg{pgf}/\pkg{TikZ}、\pkg{pgfplots}}
+%             \end{itemize}
+      
+%           \item 插图格式
+      
+%             \begin{itemize}
+%               \item 矢量图：|.pdf| 或 |.eps|
+%               \item 位图：|.jpg| 或 |.png|
+%               \item 不（完全）支持 |.svg|、|.bmp|
+%             \end{itemize}
+      
+%           \item 参考：如何在论文中画出漂亮的插图？\link{https://www.zhihu.com/question/21664179}
+%         \end{itemize}
+%       \end{frame}
+      
+%       \begin{frame}[fragile]{表格绘制}
+%         \begin{itemize}
+%           \item 使用 \pkg{booktabs}（三线表）、\pkg{longtables}（跨页表）、\pkg{multirow}（单元格内换行） 等宏包
+%           \item 手动绘制表格确实比较令人头疼，且较难维护
+%           \item 推荐使用在线工具绘制后导出代码：
+%             \begin{itemize}
+%               \item \LaTeX{} Tables Editor \link{https://www.latex-tables.com/}
+%               \item \LaTeX{} Table Generator \link{https://www.tablesgenerator.com/latex_tables}
+%             \end{itemize}
+%         \end{itemize}
+%       \end{frame}
+      
+
+

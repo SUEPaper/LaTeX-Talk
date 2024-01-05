@@ -1,0 +1,82 @@
+% 默认页面大小 4:3
+% \documentclass[10pt]{ctexbeamer}
+% 页面大小 16:9
+\documentclass[10pt, aspectratio=169]{ctexbeamer}
+
+
+\usetheme{suep}
+
+% 引入参考文献列表的 .bib 文件, 使用 GB/T 7714-2015 的文献著录规则.
+\usepackage[backend=biber, style=gb7714-2015]{biblatex}
+\addbibresource{ref.bib}
+
+\usepackage{tipa}
+\usepackage{xcolor}
+\usepackage{fontawesome5}
+\usepackage{unicode-math}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\usepackage{hologo}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{fontspec}
+\usepackage{bookmark}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage[font=small]{caption}
+\usepackage{tikz}
+\usepackage{algorithm2e}
+
+\renewcommand{\thefigure}{\Roman{figure}}
+
+\setCJKmainfont[
+  Path=fonts/,
+  Extension=.otf,
+  UprightFont=SourceHanSerifSC-SemiBold,
+  BoldFont=SourceHanSerifSC-Heavy,
+  ItalicFont=SourceHanSerifSC-SemiBold,
+  BoldItalicFont=SourceHanSerifSC-SemiBold
+]{SourceHanSerifSC-Regular}
+
+% 定义一些特殊的command
+
+\def\rawcmd#1{\texttt{\color{blue}\footnotesize #1}}
+\newcommand\pkg[1]{\texttt{#1}}
+\newcommand\link[1]{\href{#1}{\faLink}}
+\definecolor{LightGray}{gray}{0.9}
+
+% 开始文档 *****************************************************************
+
+\title{ \LaTeX{} 排版简要介绍 }
+\subtitle{从入门到放弃}
+\author[Haiwen\,Zhang]{\href{mailto:haiwen.zhang@zju.edu.cn}{纸上得来终觉浅}}
+\institute{数理学院数学系}
+\date[\today]{\today, 中国上海}
+\subject{展示主题}
+\keywords{展示, 关键词}
+
+\begin{document}
+
+\begin{frame}[plain]
+  \maketitle
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{目录}
+  \tableofcontents
+\end{frame}
+
+\input{sections/01_introduction}
+\input{sections/02_install}
+\input{sections/03_content}
+\input{sections/04_math}
+\input{sections/05_others}
+\input{sections/06_chinese}
+\input{sections/07_packages}
+\input{sections/advanced}
+\input{sections/templates}
+% \input{sections/summary}
+\input{sections/thanks}
+
+\end{document}

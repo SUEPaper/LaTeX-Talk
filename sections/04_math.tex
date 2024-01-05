@@ -1,0 +1,308 @@
+\section{数学公式}
+
+\subsection{数学模式}
+
+\begin{frame}[fragile]{数学模式}
+  \begin{itemize}
+      \item 数学公式排版是 \LaTeX{} 的绝对强项
+      \item 一切数学公式都要在数学模式下输入
+      \begin{itemize}
+          \item 建议始终调用 \texttt{amsmath} 宏包，由美国数学学会(AMS)提供
+          \item 还有更加现代的 \texttt{unicode-math} 宏包，兼容了Unicode 字符和 OpenType 字体
+      \end{itemize}
+      \item 数学模式与文本模式的区别
+      \begin{itemize}
+          \item 一些符号的输出不同
+          \item 有自己的字体、间距等规则
+          \item 无视空格，不可有空行
+      \end{itemize}
+      \item 行内 (inline) 公式，用 \mintinline{tex}{$...$} 或 \mintinline{tex}{\(...\)} 包裹
+      \item 行间 (display) 公式
+      \begin{itemize}
+          \item 单行公式用 \mintinline{tex}{\[...\]} 包裹
+          \item 多行公式用 \texttt{equation} / \texttt{align} / \texttt{gather} 等环境
+          \item \alert{不要用 \texttt{\$\$...\$\$}}：\TeX{} 原始语法，会产生很多问题
+          \item 想输入正常的文本？\mintinline{tex}{\text{...}}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+  
+\begin{frame}[fragile]{数学模式 --- cont.} \label{math-examples}
+  \begin{columns}
+      \begin{column}{0.5\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+Does $\sum_{n=1}^{+\infty} n$ equal to
+\(-\frac{1}{12}\)?
+\[   \sum_{n=1}^{+\infty} n
+    = \lim_{n\to+\infty}\frac{n(n+1)}{2}
+    = +\infty \neq -\frac{1}{12} \]
+
+\begin{equation} \label{eq:cauchy}
+    \frac{f'(\xi)}{g'(\xi)} = \frac{f(b)-f(a)}{g(b)-g(a)}
+\end{equation}
+式 \eqref{eq:cauchy} 称为 Cauchy 中值定理。
+
+\begin{align}
+        \cos 2\theta
+    &= \cos^2 \theta - \sin^2 \theta \\
+    &= 2 \cos^2 \theta - 1
+\end{align}
+          \end{minted}
+      \end{column}
+      \begin{column}{0.48\textwidth}\small
+  Does $\sum_{n=1}^{+\infty} n$ equal to
+  \(-\frac{1}{12}\)?
+  \[   \sum_{n=1}^{+\infty} n
+     = \lim_{n\to+\infty}\frac{n(n+1)}{2}
+     = +\infty \neq -\frac{1}{12} \]
+  
+  \begin{equation} \label{eq:cauchy}
+      \frac{f'(\xi)}{g'(\xi)} = \frac{f(b)-f(a)}{g(b)-g(a)}
+  \end{equation}
+  式 \eqref{eq:cauchy} 称为 Cauchy 中值定理。
+  
+  \begin{align}
+         \cos 2\theta
+      &= \cos^2 \theta - \sin^2 \theta \\
+      &= 2 \cos^2 \theta - 1
+  \end{align}
+      \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{公式}
+
+\begin{frame}[fragile]{公式排版}
+  \begin{itemize}
+      \item 所有的字母都作为变量处理，注意命令后面的空格
+      \item 上下标：\mintinline{tex}{^} 和 \mintinline{tex}{_}
+      \item 函数与常用运算符：\mintinline{tex}{\sin}、\mintinline{tex}{\log}、\mintinline{tex}{\lim}、\mintinline{tex}{\max} 等
+      \item 巨算符：\mintinline{tex}{\sum}、\mintinline{tex}{\prod}、\mintinline{tex}{\int} 等
+      \begin{itemize}
+          \item 在行内公式中，上下标会被压缩（见 \ref{math-examples} 页）
+          \item 可以使用 \mintinline{tex}{\limits} 强制显示上下标
+          \item 建议阅读 lshort 的相关章节
+      \end{itemize}
+      \item 手动调节间距：\mintinline{tex}{\,}、\mintinline{tex}{\:}、\mintinline[showspaces]{tex}{\ }、\mintinline{tex}{\!}、\mintinline{tex}{\quad}、\mintinline{tex}{\qquad} 等
+      \item 分式：\mintinline{tex}{\frac{num}{denom}}
+      \begin{itemize}
+          \item 行内分式不好看？考虑写成 \texttt{a/b} 或改用行间公式
+          \item \emph{不推荐} \mintinline{tex}{\dfrac} 一把梭
+      \end{itemize}
+  \end{itemize}
+  \end{frame}
+  
+  \begin{frame}[fragile]{常用数学符号}
+  \begin{itemize}
+      \item 希腊字母：\mintinline{tex}{\alpha} $\alpha$、\mintinline{tex}{\beta} $\beta$、\mintinline{tex}{\Gamma} $\Gamma$、\mintinline{tex}{\Delta} $\Delta$ 等
+      \item 无穷大：\mintinline{tex}{\infty} $\infty$
+      \item 根式：\mintinline{tex}{\sqrt{2}} $\sqrt{2}$、\mintinline{tex}{\sqrt[n]{x}} $\sqrt[n]{x}$
+      \item 省略号：\mintinline{tex}{\dots} $\dots$、\mintinline{tex}{\ldots} $\ldots$、\mintinline{tex}{\cdots} $\cdots$、\mintinline{tex}{\vdots} $\vdots$、\mintinline{tex}{\ddots} $\ddots$
+      \item 关系：\mintinline{tex}{\leq} $\leq$ vs. \mintinline{tex}{\leqslant} $\leqslant$、\mintinline{tex}{\neq} $\neq$、\mintinline{tex}{\in} $\in$、\mintinline{tex}{\subset} $\subset$ 等
+      \item 矩阵与行列式：\texttt{matrix}、\texttt{pmatrix}、\texttt{vmatrix} 等环境
+  \end{itemize}
+  \pause
+  \begin{columns}
+      \begin{column}{0.65\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+  \[ \begin{vmatrix}
+      1 & 2 & 3 \\
+      2 & 3 & 1 \\
+      3 & 1 & 2
+  \end{vmatrix} \]
+  
+  注意上下标：$a_ij^xy$ vs. $a_{ij}^{xy}$。
+          \end{minted}
+      \end{column}
+      \begin{column}{0.35\textwidth}\small
+  \[ \begin{vmatrix}
+      1 & 2 & 3 \\
+      2 & 3 & 1 \\
+      3 & 1 & 2
+  \end{vmatrix} \]
+  
+  注意上下标：$a_ij^xy$ vs. $a_{ij}^{xy}$。
+      \end{column}
+  \end{columns}
+  \end{frame}
+  
+  \begin{frame}[fragile]{括号与定界符}
+  \begin{itemize}
+      \item 基本括号 \texttt{( ) [ ] \{ \}}
+      \item 绝对值、范数：\mintinline{tex}{|x|} $|x|$、\mintinline{tex}{\|x\|} $\|x\|$
+      \begin{itemize}
+          \item 或使用 \mintinline{tex}{\vert}、\mintinline{tex}{\Vert}
+      \end{itemize}
+      \item 注意区别：\mintinline{tex}{\langle x \rangle} $\langle x \rangle$ vs. \mintinline{tex}{<x>} $<x>$
+      \item 自动调节大小：使用 \mintinline{tex}{\left} 和 \mintinline{tex}{\right}
+      \item 手动调节大小：\mintinline{tex}{\big}、\mintinline{tex}{\Big}、\mintinline{tex}{\bigg}、\mintinline{tex}{\Bigg}
+  \end{itemize}
+  \pause
+  \begin{columns}
+      \begin{column}{0.7\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+  \[ \sec(\theta^2) \]
+  \[ \sec\big(\theta^2\big) \]
+  
+  \[ \lfloor \frac{xy}{x + y} \rfloor \]
+  \[ \left\lfloor \frac{xy}{x + y} \right\rfloor \]
+  \end{minted}
+      \end{column}
+      \begin{column}{0.3\textwidth}\small
+  \[ \sec(\theta^2) \]
+  \[ \sec\big(\theta^2\big) \]
+  
+  \[ \lfloor \frac{xy}{x + y} \rfloor \]
+  \[ \left\lfloor \frac{xy}{x + y} \right\rfloor \]
+      \end{column}
+  \end{columns}
+\end{frame}
+  
+\subsection{字体}
+
+\begin{frame}[fragile]{符号与字体}
+  \begin{itemize}
+    \item 符号不是按钮点出来的，也不是天上掉下来的 \pause
+    \begin{itemize}
+      \item （几乎）所有的符号都由字体提供 \pause
+      \item 分清「它是什么」和「它长什么样」（术语：character 和 glyph）
+    \end{itemize} \pause
+    \item 寻找符号
+    \begin{itemize}
+      \item 最常用的额外字体包：\pkg{amssymb}
+      \item \LaTeX{} 公式大全 \link{https://suepaper.github.io/math201/docs/latex/math}
+      \item 在线\LaTeX{}公式编辑器（支持图片识别） \link{https://www.latexlive.com/home}
+    \end{itemize} \pause
+    \item 数学字体
+    \begin{itemize}
+      \item 你们要的「Times New Roman」：\pkg{newtxmath} 宏包
+      \item \alert{不要用 \pkg{times} 和 \pkg{mathptmx} 宏包}
+      \item 加粗：使用 \pkg{bm} 宏包的 \mintinline{tex}{\bm} 命令（\mintinline{tex}{\mathbf} 只有直立的字母）
+    \end{itemize} 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{特殊数学字体}
+  \begin{itemize}
+      \item 数学模式中不要使用文本模式的字体命令（除非你知道自己在做什么）
+      \item 针对数学环境中的字符有特定的命令
+  \end{itemize}
+  \small
+  \begin{tabular}{|l|l|l|}
+      \hline
+      命令 & 样式 & 备注 \\
+      \hline
+      \mintinline{tex}{\mathrm{...}} & $\mathrm{ABCDEabcde1234}$ & \\
+      \mintinline{tex}{\mathit{...}} & $\mathit{ABCDEabcde1234}$ & \\
+      \mintinline{tex}{\mathbf{...}} & $\mathbf{ABCDEabcde1234}$ & 粗斜体使用 \mintinline{tex}{\boldsymbol} \\
+      \mintinline{tex}{\mathsf{...}} & $\mathsf{ABCDEabcde1234}$ & \\
+      \mintinline{tex}{\mathtt{...}} & $\mathtt{ABCDEabcde1234}$ & \\
+      \mintinline{tex}{\mathcal{...}} & $\mathcal{ABCDE}$ & 只有大写 \\
+      \mintinline{tex}{\mathbb{...}} & $\mathbb{ABCDE}$ & 只有大写，依赖 \texttt{amssymb} \\
+      \mintinline{tex}{\mathfrak{...}} & $\mathfrak{ABCDEabcde1234}$ & 依赖 \texttt{amssymb} \\
+      \mintinline{tex}{\mathscr{...}} & $\mathscr{ABCDE}$ & 只有大写，依赖 \texttt{mathrsfs} \\
+      \hline
+  \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{现代的数学输入方式}
+  \begin{itemize}
+    \item \LaTeX{} 的公式确实很强大，但是......符号有点难记？
+    \item 新方案：\pkg{unicode-math} 提供了几乎所见即所得的公式输入
+    \begin{itemize}
+      \item 符号、字体、样式精调的一揽子解决方案
+      \item 可直接输入各类符号对应的 Unicode 字符（需要使用 UTF-8 编码）
+      \item 彻底修改底层，不可与传统方案混用
+      \item 自动加载 \pkg{amsmath}, 不需要再使用 \mintinline{tex}{\usepackage{amsmath}}
+    \end{itemize}
+  \end{itemize}
+  \pause
+  \begin{columns}
+    \begin{column}{0.4\textwidth}
+      \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\begin{equation*}
+  Γ(x) dx = ±∞
+\end{equation*}
+
+\begin{align*}
+  \symbf{\beta} &= \beta \symbf{I} \\
+  \symbf{a} &= a \symbf{I}
+\end{align*}
+      \end{minted}
+    \end{column}
+    \begin{column}{0.4\textwidth}
+      \begin{equation*}
+        Γ(x) dx = ±∞
+      \end{equation*}
+      
+      \begin{align*}
+        \symbf{\beta} &= \beta \symbf{I} \\
+        \symbf{a} &= a \symbf{I}
+      \end{align*}
+    \end{column}
+  \end{columns}
+\end{frame}
+  
+\begin{frame}[fragile]{一些需要注意的规范写法}
+  \begin{itemize}
+      \item 特定函数一定要用专门命令，或写为正体
+      \begin{itemize}
+          \item \raisebox{-.35ex}{\includegraphics[width=1em]{images/emoji-wrong.pdf}} \mintinline{tex}{\mathrm{lim}_{x\to 0} log_2 x} \quad $\mathrm{lim}_{x\to 0} log_2 x$
+          \item \raisebox{-.35ex}{\includegraphics[width=1em]{images/emoji-right.pdf}} \mintinline{tex}{\lim_{x\to 0} \log_2 x} \quad $\displaystyle\lim_{x\to 0} \log_2 x$
+      \end{itemize}
+      \item 除了变量以外都要用正体，\emph{特别是微分算子}
+      \begin{itemize}
+          \item \raisebox{-.35ex}{\includegraphics[width=1em]{images/emoji-wrong.pdf}} \mintinline{tex}{\frac{d}{dx}} \quad $\frac{d}{dx}$
+          \item \raisebox{-.35ex}{\includegraphics[width=1em]{images/emoji-right.pdf}} \mintinline{tex}{\frac{\mathrm{d}}{\mathrm{d}x}} \quad $\frac{\mathrm{d}}{\mathrm{d}x}$
+      \end{itemize}
+      \item 建议在微分算子之前加上 \mintinline{tex}{\,} 调整间距
+      \begin{itemize}
+          \item \raisebox{-.35ex}{\includegraphics[width=1em]{images/emoji-wrong.pdf}} \mintinline{tex}{\int x\mathrm{d}x} \quad $\int x\mathrm{d}x$
+          \item \raisebox{-.35ex}{\includegraphics[width=1em]{images/emoji-right.pdf}} \mintinline{tex}{\int x\,\mathrm{d}x} \quad $\int x\,\mathrm{d}x$
+      \end{itemize}
+      \item 多字符变量使用 \mintinline{tex}{\mathit} 或其他字体，不要裸写
+  
+  \end{itemize}
+  \begin{columns}
+      \begin{column}{0.6\textwidth}
+          \begin{minted}[fontsize=\scriptsize]{tex}
+  \[ \begin{matrix}
+      XYZ & Duration \\
+      \mathit{XYZ} & \mathit{Duration}
+  \end{matrix} \]
+  \end{minted}
+      \end{column}
+      \begin{column}{0.4\textwidth}\small
+  \[ \begin{matrix}
+      \raisebox{-.25ex}{\includegraphics[width=1em]{images/emoji-wrong.pdf}} & XYZ & Duration \\
+      \raisebox{-.25ex}{\includegraphics[width=1em]{images/emoji-right.pdf}} & \mathit{XYZ} & \mathit{Duration}
+  \end{matrix} \]
+      \end{column}
+  \end{columns}
+  \end{frame}
+
+\begin{frame}[fragile]{小露身手}
+  \begin{equation*}
+    \oint \mathscr{D}[x(t)] \sqrt{\frac{3 \pi^{2}-\sum_{q=0}^{\infty}(z+\hat{L})^{q} \exp \left(\mathrm{i}^{2} \hbar x\right)}{(\operatorname{Tr} \mathscr{A})\left(\Lambda_{j_{1} j_{2}}^{i_{1} i_{2}} \Gamma_{i_{1} i_{2}}^{j_{1} j_{2}} \hookrightarrow \vec{D} \cdot \mathrm{P}\right)}}=
+    \underbrace{\widetilde{\left\langle \frac{\notin \emptyset}
+    {\varpi\alpha_{k\uparrow}}\middle\vert
+    \frac{\partial_\mu T_{\mu\nu}}{2}\right\rangle}}_{\mathrm{K}_3
+    \mathrm{Fe}(\mathrm{CN})_6} ,\forall z \in \mathbb{R}
+  \end{equation*}
+
+  \pause
+  
+  \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\begin{equation*} % \usepackage{unicode-math}
+  \oint \mathscr{D}[x(t)] \sqrt{\frac{3 \pi^{2}-\sum_{q=0}^{\infty}(z+\hat{L})^{q} 
+  \exp \left(\mathrm{i}^{2} \hbar x\right)}
+  {(\operatorname{Tr} \mathscr{A})\left(\Lambda_{j_{1} j_{2}}^{i_{1} i_{2}} \Gamma_{i_{1} i_{2}}^{j_{1} j_{2}} 
+  \hookrightarrow \vec{D} \cdot \mathrm{P}\right)}}=
+  \underbrace{\widetilde{\left\langle \frac{\notin \emptyset}
+  {\varpi\alpha_{k\uparrow}}\middle\vert
+  \frac{\partial_\mu T_{\mu\nu}}{2}\right\rangle}}_{\mathrm{K}_3
+  \mathrm{Fe}(\mathrm{CN})_6} ,\forall z \in \mathbb{R}
+\end{equation*}
+  \end{minted}
+\end{frame}
+

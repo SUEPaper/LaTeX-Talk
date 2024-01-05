@@ -1,0 +1,200 @@
+\section{常用环境}
+
+\subsection{表格}
+\begin{frame}[fragile]{表格}
+  \begin{itemize}
+      \item \texttt{tabular} 环境，一般包裹在 \texttt{table} 环境中变成浮动体
+      \mintinline{tex}{\begin{tabular}}\texttt{\small \{\textit{column spec}\}}
+      \begin{itemize}
+          \item \texttt{l} / \texttt{c} / \texttt{r}：左/中/右对齐
+          \item \texttt{|}：竖线分隔；\texttt{@\{\}}：去除列间距；\texttt{@\{...\}}：自定义列间内容
+          \item \texttt{\*\{\textit{num}\}\{\textit{col}\}}：重复 \texttt{\textit{num}} 次 \texttt{\textit{col}} 列格式
+      \end{itemize}
+      \item 在表格内容中 \texttt{\&} 分隔列，\mintinline{tex}{\\} 换行，\mintinline{tex}{\hline} 画横线
+      \item \texttt{booktabs} 宏包提供三线表式样
+      \item 也可以合并单元格、拆分单元格等更复杂的操作
+      \item 推荐使用
+      \begin{itemize}
+          \item \href{https://www.tablesgenerator.com/}{Tables Generator} 网站
+          \item \href{https://www.latex-tables.com/}{Tables Editor} 网站
+          \item 表格真的太难写了
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{代码}
+\begin{frame}[fragile]{代码环境}
+  \begin{itemize}
+      \item 行内代码使用 \mintinline{tex}{\verb}{\small \texttt{<\textit{delim}>...<\textit{delim}>}}
+      \begin{itemize}
+          \item 区分于正常的 \texttt{\{...\}}
+          \item \texttt{\textit{delim}} 可以是除了星号 \texttt{*} 的任意字符
+          \item \mintinline{tex}{\verb*} 命令表示显示空格
+      \end{itemize}
+      \item 代码环境：\texttt{verbatim}
+      \begin{itemize}
+          \item 默认使用等宽字体，不解析 \LaTeX{} 命令
+          \item 内容中的特殊字符都不需要转义
+      \end{itemize}
+      \item \texttt{listings} 宏包提供代码高亮
+      \item \texttt{minted} 功能更强大，需要安装 Python 依赖，本教程的代码环境都是\texttt{minted}
+  \end{itemize}
+  \pause
+  \begin{columns}
+      \begin{column}{0.4\textwidth}
+          \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+  \verb|\LaTeX ^_^|
+  and
+  \verb*`printf("Hello, world!\n");`
+          \end{minted}
+      \end{column}
+      \begin{column}{0.3\textwidth}\scriptsize
+  \verb|\LaTeX ^_^|
+  and
+  \verb*`printf("Hello, world!\n");`
+      \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{交叉引用}
+
+\begin{frame}[fragile]{交叉引用}
+
+  \begin{itemize}
+    \item  \LaTeX{} 中使用 \mintinline{tex}{\label} 标记，然后可以使用 \mintinline{tex}{\ref} 来引用这个标记。\mintinline{tex}{\label} 可以放在使用计数器的对象之后。
+    \item 为了使得对公式编号的引用带有括号，推荐使用 AMSmath 宏包中的 \mintinline{tex}{\eqref} 命令。 对于多行公式环境，每一个换行符前都可以添加一个 \mintinline{tex}{\label} 用于引用该行公式。
+  \end{itemize}
+  \pause
+
+  \begin{columns}
+    \begin{column}{.4\textwidth} 
+      \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\begin{equation}
+  a = b + c
+\label{eq:example}
+\end{equation}
+\begin{figure}
+  \includegraphics[width=3cm]{example-image-a}
+  \caption{示例}\label{fig:example}
+\end{figure}
+如公式 \eqref{eq:example} 所示，
+如图\ref{fig:example}所示
+      \end{minted}
+    \end{column}
+    \begin{column}{.4\textwidth} \small
+      \begin{equation}
+        a = b + c
+      \label{eq:example}
+      \end{equation}
+      \begin{figure}
+        \includegraphics[width=2cm]{logo/logo.png}
+        \caption{示例}\label{figure:example}
+      \end{figure}
+      如公式 \eqref{eq:example} 所示，
+      如图\ref{figure:example}所示
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{交叉引用}
+  \begin{columns}
+    \begin{column}{.5\textwidth} 
+      \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+\begin{table} % \usepackage{booktabs}
+  \caption{人员名单}
+  \label{tab:example}
+  \centering
+  \begin{tabular}{cccccc}
+    \toprule
+    序号 & 姓名 & 性别 & 年龄 & 身高/cm & 体重/kg \\
+    \midrule
+    1 & 张三 & M & 16 & 163 & 50 \\
+    2 & 王红 & F & 15 & 159 & 47 \\
+    3 & 李二 & M & 17 & 165 & 52 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+      \end{minted}
+    \end{column}
+    \begin{column}{.4\textwidth} \tiny
+      \begin{table}[]
+        \caption{人员名单}
+        \label{tab:example}
+        \centering
+        \begin{tabular}{cccccc}
+          \toprule
+          序号 & 姓名 & 性别 & 年龄 & 身高/cm & 体重/kg \\
+          \midrule
+          1 & 张三 & M & 16 & 163 & 50 \\
+          2 & 王红 & F & 15 & 159 & 47 \\
+          3 & 李二 & M & 17 & 165 & 52 \\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+      如表\ref{tab:example} 所示
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\subsection{文献管理}
+\begin{frame}[fragile]
+  \frametitle{文献管理}
+  \begin{itemize}
+    \item 建议自动生成\pause （你只有三篇参考文献？）\pause
+    \item |.bib| 数据库
+  
+      \begin{itemize}
+        \item Google Scholar 可直接复制：点击 \faQuoteRight \quad -> Bib\TeX{}
+        \item 用 EndNote、Jabref 等生成
+      \end{itemize} \pause
+  
+    \item 传统方法（大部分会议、期刊模板）：Bib\TeX{}  后端
+  
+      \begin{itemize}
+        \item 控制文献、引用样式：\pkg{natbib} 宏包
+        \item 国家标准 GB/T 7714--2015
+              \link{https://www.gb688.cn/bzgk/gb/newGbInfo?hcno=7FA63E9BBA56E60471AEDAEBDE44B14C}
+              \link{https://github.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/files/153951/GBT.7714-2015.pdf}：
+              \alert{\pkg{gbt7714} 宏包}
+      \end{itemize} \pause
+  
+    \item 现代方法：\pkg{biber} 后端 + \pkg{biblatex} 宏包
+  
+      \begin{itemize}
+        \item 国家标准：\pkg{biblatex-gb7714-2015} 宏包
+      \end{itemize} \pause
+  
+    \item 需多次编译
+      \begin{itemize}
+        \item pdf\LaTeX{} -> Bib\TeX{} -> pdf\LaTeX{} -> pdf\LaTeX{}
+        \item Xe\LaTeX{} -> Bib\TeX{} -> Xe\LaTeX{} -> Xe\LaTeX{}
+        \item 一键使用：\pkg{VS Code plugin}, \pkg{MakeFile}, \pkg{Batch} script, \pkg{latexmk}
+      \end{itemize}
+    
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{文献引用样例}
+  \begin{columns}
+    \begin{column}{.6\textwidth} 
+      \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\scriptsize]{tex}
+% In body.tex
+“真理只有一个，而究竟谁发现了真理，不依靠主观的夸张，
+而依靠客观的实践。”-- 毛泽东\cite{毛泽东1949新民主主义论}。
+
+% In references.bib
+@book{毛泽东1949新民主主义论,
+  title={新民主主义论},
+  author={毛泽东},
+  year={1949},
+  publisher={长江出版社}
+}
+      \end{minted}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      “真理只有一个，而究竟谁发现了真理，不依靠主观的夸张，而依靠客观的实践。” -- 毛泽东\cite{毛泽东1949新民主主义论}。
+
+      \printbibliography[heading=none]
+    \end{column}
+    \end{columns}
+\end{frame}

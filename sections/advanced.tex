@@ -1,0 +1,68 @@
+\section{进阶}
+\subsection{beamer}
+\begin{frame}[fragile]
+  \frametitle{幻灯片}
+  \begin{itemize}
+    \item<+-> 基本框架
+  
+      \begin{itemize}
+        \item \pkg{beamer} 或 \pkg{ctexbeamer} 文档类
+        \item 页面由 \mintinline{tex}{frame}  环境组织
+        \item 文本内容：建议使用 \mintinline{tex}{itemize} 和 \mintinline{tex}{enumerate}
+        \item 图表：不再浮动，不建议使用交叉引用
+        \item 定理及强调：\mintinline{tex}{theorem} 、\mintinline{tex}{proof} 、\mintinline{tex}{block} 等
+        \item 分栏：\mintinline{tex}{columns} + \mintinline{tex}{columns} 环境
+      \end{itemize}
+  
+    \item<+-> 主题与样式
+  
+      \begin{itemize}
+        \item \mintinline{tex}{\usetheme}、\mintinline{tex}{\lstinline[style=style@inline]+\use[font|color|inner|outer]theme+}
+        \item 更现代的主题：\mintinline{tex}{metropolis}
+        \item 使用「默认」字体：\mintinline{tex}{\usefonttheme{serif}}
+      \end{itemize}
+  
+    \item<+-> 动画（覆盖）
+  
+      \begin{itemize}
+        \item \mintinline{tex}{\pause}命令
+        \item \mintinline{tex}{\onslide<1>}、\mintinline{tex}{\item<1->}等
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+  
+\subsection{git}
+
+\begin{frame}[fragile]
+  \frametitle{Git版本管理}
+  \begin{itemize}
+    \item<+-> 版本管理的必要性
+      \begin{itemize}
+        \item 远离「初稿，第二稿……终稿，终稿（打死也不改了）」命名
+        \item 有底气做大范围修改、重构
+        \item 方便与他人协同合作
+      \end{itemize}
+    \item<+-> 基本用法
+      \begin{itemize}
+        \item 跟踪更改：\verb|git init|、\verb|git add|
+              \verb|git commit|
+        \item 撤销与回滚：\verb|git reset|、\verb|git revert|
+        \item 分支与高级用法：\verb|git branch|、\verb|git checkout|
+              \verb|git rebase|
+        \item 远端仓库操作：\verb|git pull|、\verb|git push|、
+              \verb|git fetch|
+        \item 推荐用 VS Code 等进行可视化操作
+        \item 参考链接：\link{https://git-scm.com/book/en/v2}
+              \link{https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000}
+      \end{itemize}
+
+    \item<+-> GitHub \href{https://github.com}{\faGithub} \& more
+
+      \begin{itemize}
+        \item 远程 Git 仓库
+        \item Clone \& fork
+        \item Issues \& pull requests
+        \item<+-> \alert{提醒：绑定 \texttt{.edu} 邮箱可以有更多优惠}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
