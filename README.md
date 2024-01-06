@@ -1,4 +1,4 @@
-# 《LaTeX 入门到放弃》 
+# 《LaTeX 从入门到放弃》 
 
 上海电力大学数学系LaTeX讲座
 
@@ -10,7 +10,7 @@
 * [南方科技大学 latex-talk](https://github.com/SUSTech-CRA/latex-talk)
 * [南京大学 latex-talk](https://git.nju.edu.cn/atXYblip/latex-lecture)
 * [华东师范大学 潘建瑜 《LaTeX 科技排版入门》](https://math.ecnu.edu.cn/~jypan/Latex/Latex_Talk2018.pdf)
-* [浙江大学计算机学院朋辈辅学： \LaTeX 排版简要介绍](https://www.bilibili.com/video/BV12k4y1s7Y)
+* [浙江大学计算机学院朋辈辅学： LaTeX 排版简要介绍](https://www.bilibili.com/video/BV12k4y1s7Y)
 * [中国科学院大学Beamer模板](https://github.com/icgw/ucas-beamer/)
 
 ## 许可说明

@@ -1,9 +1,5 @@
-% !TeX encoding = UTF-8
-% !TeX program = latexmk
-% !TeX root = latex-talk.tex
 
 \section{总结}
-
 
 \begin{frame}{系统学习}
   \begin{itemize}
@@ -40,34 +36,12 @@
   \end{itemize}
 \end{frame}
 
-
-% \begin{frame}[fragile]{利用文档}
-%   \begin{itemize}
-%     \item 常用文档
-%       \begin{itemize}
-%         \item \pkg{symbols}: 符号大全
-%         \item \pkg{Mathmode}: 数学参考
-%         \item \pkg{ctex}, \pkg{xeCJK}: 中文支持
-%         \item \pkg{texlive-zh}: \TL 安装与使用
-%         \item 所用宏包文档
-%       \end{itemize}
-%     \item 工具
-%       \begin{itemize}
-%         \item |tlmgr|: \TL 管理器
-%         \item |texdoc|: \TeX 文档查看器\\
-%           例如：|texdoc lshort-zh-cn|
-%         \item 在线文档 \TeX doc \url{http://texdoc.net/}
-%         \item TeX Studio 和 WinEdt 都支持在帮助里看文档
-%       \end{itemize}
-%   \end{itemize}
-% \end{frame}
-
 \begin{frame}{常见 \LaTeX{} 困惑}
   \begin{itemize}
     \item \alert{编译不通过} 缺少必要宏包，命令拼写错误，括号未配对等
     \item \alert{表格图片乱跑} 非问题，\LaTeX{} 浮动定位算法 \link{https://liam.page/2017/04/30/floats-in-LaTeX-the-positioning-algorithm/}
     \item \alert{段落间距变大} 非问题，\LaTeX{} 排版算法
-    \item \alert{参考文献} 推荐使用 \BibTeX 或者 Bib\LaTeX（视模板而定），也可以手写 \cmd{bibitem} \link{https://github.com/hushidong/biblatex-gb7714-2015}
+    \item \alert{参考文献} 推荐使用 \BibTeX \link{https://github.com/hushidong/biblatex-gb7714-2015}
   \end{itemize}
 \end{frame}
 
@@ -80,7 +54,7 @@
             \begin{itemize}
               \item 大括号不匹配
               \item 环境头尾不匹配
-              \item 没有对特殊字符进行转义（|\|、|_|、|&|）
+              \item 没有对特殊字符进行转义（\mintinline{tex}{\v}、\mintinline{tex}{_}、\mintinline{tex}{&}）
             \end{itemize}
   
         \item 命令用不对
@@ -94,7 +68,7 @@
       \item<+-> 查找出错点
       \begin{itemize}
         \item 在编辑器的“问题”栏查看报错信息
-        \item 在 |.log| 文件搜索“Error”
+        \item 在 \mintinline{tex}{.log} 文件搜索“Error”
         \item 注释掉没问题的内容重新编译
       \end{itemize}
   
@@ -138,7 +112,7 @@
             \item 尽量不带冗余内容
             \item 策略：二分查找
           \end{itemize}
-        \item 别用手机拍屏幕\CJKsout*{，跪下来求你了}
+        \item 别用手机拍屏幕\alert{，跪下来求你了}
         \item 遵循社区行为准则（code of conduct）
       \end{itemize}
   
@@ -173,7 +147,7 @@
         \item 科普、答疑
       \end{itemize}
   
-    \item<+-> \CJKsout{来当 \LaTeX{}从入门到放弃的主讲人}
+    \item<+-> \alert{来当 \LaTeX{}从入门到放弃的主讲人}
   \end{itemize}
 \end{frame}
 

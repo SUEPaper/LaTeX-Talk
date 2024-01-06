@@ -46,6 +46,20 @@
 \newcommand\link[1]{\href{#1}{\faLink}}
 \definecolor{LightGray}{gray}{0.9}
 
+\newcommand\XeTeX{\hologo{XeTeX}}
+\newcommand\pdfTeX{\hologo{pdfTeX}}
+\newcommand\LuaTeX{\hologo{LuaTeX}}
+\newcommand\XeLaTeX{\hologo{Xe}\kern-.13em\LaTeX{}}
+\newcommand\pdfLaTeX{pdf\LaTeX{}}
+\newcommand\LuaLaTeX{Lua\LaTeX{}}
+\newcommand\BibTeX{\hologo{BibTeX}}
+
+\def\texlive{\TeX \ Live}
+\def\TL{\texlive}
+\def\mactex{Mac\TeX}
+\def\BibTeX{Bib\TeX}
+
+
 % 开始文档 *****************************************************************
 
 \title{ \LaTeX{} 排版简要介绍 }
@@ -62,9 +76,10 @@
   \maketitle
 \end{frame}
 
-\begin{frame}[t]
-  \frametitle{目录}
-  \tableofcontents
+\begin{frame}[t]{目录}
+  \begin{multicols}{2}
+      \tableofcontents
+  \end{multicols}
 \end{frame}
 
 \input{sections/01_introduction}
@@ -76,7 +91,7 @@
 \input{sections/07_packages}
 \input{sections/advanced}
 \input{sections/templates}
-% \input{sections/summary}
+\input{sections/summary}
 \input{sections/thanks}
 
 \end{document}
